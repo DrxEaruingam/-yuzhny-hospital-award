@@ -69,7 +69,6 @@
         
         <!-- Countdown / Winner Section -->
         <section id="statusWrapper" class="mb-10 text-center fade-in">
-             <!-- This section will be replaced by the winner card after voting ends -->
              <div id="countdownWrapper">
                  <h2 id="countdownTitle" class="text-2xl font-bold text-blue-900 mb-3">Voting Status</h2>
                  <div id="countdown" class="countdown-box text-white p-4 rounded-xl max-w-sm mx-auto flex justify-center space-x-4">
@@ -77,17 +76,6 @@
                     <div><span id="hours" class="text-3xl font-bold"></span><div class="text-xs">Hours</div></div>
                     <div><span id="minutes" class="text-3xl font-bold"></span><div class="text-xs">Minutes</div></div>
                     <div><span id="seconds" class="text-3xl font-bold"></span><div class="text-xs">Seconds</div></div>
-                 </div>
-             </div>
-
-             <!-- Winner announcement card (hidden by default) -->
-             <div id="winnerSection" class="hidden">
-                 <h2 class="text-3xl font-bold text-blue-900 mb-4">This Week's Winner Is...</h2>
-                 <div class="winner-card max-w-md mx-auto p-6 rounded-xl shadow-lg text-center">
-                     <img src="https://placehold.co/128x128/ffffff/000000?text=WIN" alt="Winner" class="w-32 h-32 rounded-full object-cover mx-auto border-4 border-white mb-4">
-                     <p class="text-3xl font-bold" id="winnerNameDisplay">Dr. Raaju Kalal</p>
-                     <p class="text-lg">Ophthalmologist</p>
-                     <p class="mt-4 text-sm">Congratulations on your outstanding performance!</p>
                  </div>
              </div>
         </section>
@@ -134,7 +122,7 @@
                     <p class="text-center text-gray-500 mb-6">Help select this week's Best Physician.</p>
                     
                     <form id="votingForm" action="https://formspree.io/f/xjkrybpj" method="POST">
-                        <fieldset id="votingFieldset" disabled>
+                        <fieldset id="votingFieldset">
                             <div class="space-y-4">
                                 <div>
                                     <label for="voterName" class="block text-sm font-medium text-gray-700">Your Name</label>
@@ -176,18 +164,10 @@
     </footer>
 
     <script>
-        // --- Page Element References ---
-        const countdownWrapper = document.getElementById("countdownWrapper");
-        const winnerSection = document.getElementById("winnerSection");
         const countdownTitle = document.getElementById("countdownTitle");
-        const votingFormSection = document.getElementById("votingFormSection");
-        const finalistsSection = document.getElementById("finalistsSection");
         const votingFieldset = document.getElementById("votingFieldset");
         const submitButton = document.getElementById("submitButton");
-        const form = document.getElementById("votingForm");
-        const status = document.getElementById("formStatus");
 
-        // --- Countdown Timer Logic ---
         function getISTTime() {
             const now = new Date();
             const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -197,61 +177,44 @@
         const countdownFunction = setInterval(function() {
             const nowIST = getISTTime();
 
-            const startTime = new Date(nowIST);
-            startTime.setHours(0, 0, 0, 0); // Start at midnight of the current day in IST
-             if (nowIST.getHours() >= 0) { // If it's already past midnight, set start to the next day
-                startTime.setDate(nowIST.getDate() + 1);
-            }
-            
-            const endTime = new Date(startTime.getTime() + (24 * 60 * 60 * 1000));
+            // Set the end of the voting period to the next midnight IST
+            const votingEnd = new Date(nowIST);
+            votingEnd.setDate(nowIST.getDate() + 1);
+            votingEnd.setHours(0, 0, 0, 0);
 
-            // Determine current state
-            if (nowIST < startTime) {
-                // --- BEFORE VOTING ---
-                countdownTitle.textContent = "Voting Starts In";
-                votingFormSection.classList.add('form-disabled');
-                votingFieldset.disabled = true;
-                submitButton.textContent = "Vote Soon";
+            const distance = votingEnd.getTime() - nowIST.getTime();
 
-                const distance = startTime.getTime() - nowIST.getTime();
-                updateCountdownDisplay(distance);
-
-            } else if (nowIST >= startTime && nowIST < endTime) {
-                // --- DURING VOTING ---
+            if (distance > 0) {
+                 // --- VOTING IS OPEN ---
                 countdownTitle.textContent = "Voting Ends In";
-                votingFormSection.classList.remove('form-disabled');
                 votingFieldset.disabled = false;
                 if (!submitButton.disabled) {
-                   submitButton.textContent = "Cast Your Vote";
+                    submitButton.textContent = "Cast Your Vote";
                 }
 
-                const distance = endTime.getTime() - nowIST.getTime();
-                updateCountdownDisplay(distance);
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+                document.getElementById("days").innerText = String(days).padStart(2, '0');
+                document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+                document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+                document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
             } else {
-                // --- AFTER VOTING ---
+                // --- VOTING IS CLOSED ---
                 clearInterval(countdownFunction);
-                countdownWrapper.classList.add('hidden');
-                winnerSection.classList.remove('hidden');
-                votingFormSection.classList.add('hidden');
-                finalistsSection.classList.add('hidden');
+                countdownWrapper.innerHTML = "<h2 class='text-2xl font-bold text-red-600 mb-3'>Voting for this cycle has CLOSED.</h2>";
+                votingFieldset.disabled = true;
+                submitButton.textContent = "Voting Closed";
             }
         }, 1000);
 
-        function updateCountdownDisplay(distance) {
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById("days").innerText = String(days).padStart(2, '0');
-            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-        }
-
 
         // --- Form Submission Logic ---
+        const form = document.getElementById("votingForm");
+        const status = document.getElementById("formStatus");
+
         async function handleSubmit(event) {
             event.preventDefault();
             const data = new FormData(event.target);
@@ -269,9 +232,7 @@
                 });
 
                 if (response.ok) {
-                    // Trigger Confetti!
                     confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-                    
                     status.innerHTML = "Thank you! Your vote has been submitted successfully.";
                     status.classList.add('text-green-600');
                     form.reset();
