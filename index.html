@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuzhny Hospital - Best Physician Award</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+            border-color: #2563EB;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+        .countdown-box {
+            background: linear-gradient(145deg, #1e4b8f, #1e4b8f);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .finalist-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .finalist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+         .form-disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .winner-card {
+            background: linear-gradient(135deg, #fbc531, #f9ca24);
+            color: #333;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-5 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-700 mr-3" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+            </svg>
+            <div>
+                <h1 class="text-2xl font-bold text-blue-900">Yuzhny Hospital</h1>
+                <p class="text-sm text-gray-500">Honoring Excellence in Medical Service</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-10">
+        
+        <!-- Countdown / Winner Section -->
+        <section id="statusWrapper" class="mb-10 text-center fade-in">
+             <!-- This section will be replaced by the winner card after voting ends -->
+             <div id="countdownWrapper">
+                 <h2 id="countdownTitle" class="text-2xl font-bold text-blue-900 mb-3">Voting Status</h2>
+                 <div id="countdown" class="countdown-box text-white p-4 rounded-xl max-w-sm mx-auto flex justify-center space-x-4">
+                    <div><span id="days" class="text-3xl font-bold"></span><div class="text-xs">Days</div></div>
+                    <div><span id="hours" class="text-3xl font-bold"></span><div class="text-xs">Hours</div></div>
+                    <div><span id="minutes" class="text-3xl font-bold"></span><div class="text-xs">Minutes</div></div>
+                    <div><span id="seconds" class="text-3xl font-bold"></span><div class="text-xs">Seconds</div></div>
+                 </div>
+             </div>
+
+             <!-- Winner announcement card (hidden by default) -->
+             <div id="winnerSection" class="hidden">
+                 <h2 class="text-3xl font-bold text-blue-900 mb-4">This Week's Winner Is...</h2>
+                 <div class="winner-card max-w-md mx-auto p-6 rounded-xl shadow-lg text-center">
+                     <img src="https://placehold.co/128x128/ffffff/000000?text=WIN" alt="Winner" class="w-32 h-32 rounded-full object-cover mx-auto border-4 border-white mb-4">
+                     <p class="text-3xl font-bold" id="winnerNameDisplay">Dr. Raaju Kalal</p>
+                     <p class="text-lg">Ophthalmologist</p>
+                     <p class="mt-4 text-sm">Congratulations on your outstanding performance!</p>
+                 </div>
+             </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- Left Column: Finalists -->
+            <div id="finalistsSection" class="lg:col-span-1 space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg fade-in">
+                    <h2 class="text-xl font-bold text-blue-900 mb-4">🗳️ This Week's Finalists</h2>
+                    <div class="space-y-4">
+                        <!-- Finalist 1 -->
+                        <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
+                            <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=RK" alt="Dr Raaju Kalal" class="w-16 h-16 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-gray-800">Dr Raaju Kalal</p>
+                                <p class="text-sm text-gray-600">Ophthalmologist</p>
+                            </div>
+                        </div>
+                        <!-- Finalist 2 -->
+                         <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
+                             <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=KF" alt="Dr Kalu Fernandes" class="w-16 h-16 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-gray-800">Dr Kalu Fernandes</p>
+                                <p class="text-sm text-gray-600">Medical Assistant</p>
+                            </div>
+                        </div>
+                        <!-- Finalist 3 -->
+                         <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
+                             <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=SB" alt="Dr Syed Barinzuhaib" class="w-16 h-16 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-gray-800">Dr Syed Barinzuhaib</p>
+                                <p class="text-sm text-gray-600">District Physician</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Voting Form -->
+            <div id="votingFormSection" class="lg:col-span-2">
+                <section class="bg-white p-8 rounded-xl shadow-lg fade-in" style="animation-delay: 0.2s;">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-1 text-center">Cast Your Vote</h2>
+                    <p class="text-center text-gray-500 mb-6">Help select this week's Best Physician.</p>
+                    
+                    <form id="votingForm" action="https://formspree.io/f/xjkrybpj" method="POST">
+                        <fieldset id="votingFieldset" disabled>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="voterName" class="block text-sm font-medium text-gray-700">Your Name</label>
+                                    <input type="text" id="voterName" name="Voter Name" required class="mt-1 form-input block w-full px-4 py-2 bg-gray-50 border-gray-300 rounded-md shadow-sm">
+                                </div>
+                                
+                                <div>
+                                    <label for="vote" class="block text-sm font-medium text-gray-700">Select Your Choice</label>
+                                    <select id="vote" name="Voted For" required class="mt-1 form-input block w-full px-4 py-2 bg-gray-50 border-gray-300 rounded-md shadow-sm">
+                                        <option value="" disabled selected>Select a finalist...</option>
+                                        <option value="Dr Raaju Kalal">Dr Raaju Kalal</option>
+                                        <option value="Dr Kalu Fernandes">Dr Kalu Fernandes</option>
+                                        <option value="Dr Syed Barinzuhaib">Dr Syed Barinzuhaib</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="reason" class="block text-sm font-medium text-gray-700">Reason for Your Vote <span class="text-gray-400">(Optional)</span></label>
+                                    <textarea id="reason" name="Reason for Vote" rows="5" class="mt-1 form-input block w-full px-4 py-2 bg-gray-50 border-gray-300 rounded-md shadow-sm" placeholder="Why do they deserve to win?"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 text-right">
+                                <button type="submit" id="submitButton" class="submit-button inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                                    Cast Your Vote
+                                </button>
+                            </div>
+                        </fieldset>
+                        <p id="formStatus" class="text-center mt-4 text-sm"></p>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 mt-10">
+        <p class="text-sm text-gray-500">&copy; 2025 Yuzhny Hospital | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // --- Page Element References ---
+        const countdownWrapper = document.getElementById("countdownWrapper");
+        const winnerSection = document.getElementById("winnerSection");
+        const countdownTitle = document.getElementById("countdownTitle");
+        const votingFormSection = document.getElementById("votingFormSection");
+        const finalistsSection = document.getElementById("finalistsSection");
+        const votingFieldset = document.getElementById("votingFieldset");
+        const submitButton = document.getElementById("submitButton");
+        const form = document.getElementById("votingForm");
+        const status = document.getElementById("formStatus");
+
+        // --- Countdown Timer Logic ---
+        function getISTTime() {
+            const now = new Date();
+            const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+            return new Date(utcTime + (330 * 60000));
+        }
+
+        const countdownFunction = setInterval(function() {
+            const nowIST = getISTTime();
+
+            const startTime = new Date(nowIST);
+            startTime.setHours(0, 0, 0, 0); // Start at midnight of the current day in IST
+             if (nowIST.getHours() >= 0) { // If it's already past midnight, set start to the next day
+                startTime.setDate(nowIST.getDate() + 1);
+            }
+            
+            const endTime = new Date(startTime.getTime() + (24 * 60 * 60 * 1000));
+
+            // Determine current state
+            if (nowIST < startTime) {
+                // --- BEFORE VOTING ---
+                countdownTitle.textContent = "Voting Starts In";
+                votingFormSection.classList.add('form-disabled');
+                votingFieldset.disabled = true;
+                submitButton.textContent = "Vote Soon";
+
+                const distance = startTime.getTime() - nowIST.getTime();
+                updateCountdownDisplay(distance);
+
+            } else if (nowIST >= startTime && nowIST < endTime) {
+                // --- DURING VOTING ---
+                countdownTitle.textContent = "Voting Ends In";
+                votingFormSection.classList.remove('form-disabled');
+                votingFieldset.disabled = false;
+                if (!submitButton.disabled) {
+                   submitButton.textContent = "Cast Your Vote";
+                }
+
+                const distance = endTime.getTime() - nowIST.getTime();
+                updateCountdownDisplay(distance);
+
+            } else {
+                // --- AFTER VOTING ---
+                clearInterval(countdownFunction);
+                countdownWrapper.classList.add('hidden');
+                winnerSection.classList.remove('hidden');
+                votingFormSection.classList.add('hidden');
+                finalistsSection.classList.add('hidden');
+            }
+        }, 1000);
+
+        function updateCountdownDisplay(distance) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+
+        // --- Form Submission Logic ---
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            
+            submitButton.disabled = true;
+            submitButton.textContent = "Submitting...";
+            status.innerHTML = "";
+            status.classList.remove('text-green-600', 'text-red-600');
+            
+            try {
+                const response = await fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    // Trigger Confetti!
+                    confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+                    
+                    status.innerHTML = "Thank you! Your vote has been submitted successfully.";
+                    status.classList.add('text-green-600');
+                    form.reset();
+                } else {
+                    const responseData = await response.json();
+                    if (Object.hasOwn(responseData, 'errors')) {
+                        status.innerHTML = responseData.errors.map(error => error.message).join(", ");
+                    } else {
+                        status.innerHTML = "Oops! There was a problem submitting your vote.";
+                    }
+                    status.classList.add('text-red-600');
+                }
+            } catch (error) {
+                status.innerHTML = "Oops! There was a problem submitting your vote.";
+                status.classList.add('text-red-600');
+            }
+
+            submitButton.disabled = false;
+        }
+        form.addEventListener("submit", handleSubmit);
+    </script>
+
+</body>
+</html>
