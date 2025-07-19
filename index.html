@@ -82,7 +82,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-            <!-- Left Column: Info Cards (Finalists and Previous Winner) -->
+            <!-- Left Column: Info Cards (Finalists and Hall of Fame) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
                 <!-- This Week's Finalists Card -->
                 <div class="bg-white p-6 rounded-xl shadow-lg fade-in flex flex-col">
@@ -90,39 +90,50 @@
                     <div class="space-y-4 flex-grow">
                         <!-- Finalist 1 -->
                         <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
+                            <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=RY" alt="Dr Rayyan" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200">
+                            <div>
+                                <p class="font-semibold text-gray-800">Dr Rayyan</p>
+                                <p class="text-sm text-gray-600">Ophthalmologist</p>
+                            </div>
+                        </div>
+                        <!-- Finalist 2 -->
+                         <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
+                            <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=HS" alt="Dr Haider Shah" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200">
+                            <div>
+                                <p class="font-semibold text-gray-800">Dr Haider Shah</p>
+                                <p class="text-sm text-gray-600">District Physician</p>
+                            </div>
+                        </div>
+                        <!-- Finalist 3 -->
+                         <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
                             <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=AA" alt="Dr Ayaan Allu" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200">
                             <div>
                                 <p class="font-semibold text-gray-800">Dr Ayaan Allu</p>
                                 <p class="text-sm text-gray-600">District Physician</p>
                             </div>
                         </div>
-                        <!-- Finalist 2 -->
-                         <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
-                            <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=KF" alt="Dr Kalu Fernandes" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200">
+                    </div>
+                </div>
+
+                <!-- Hall of Fame Section -->
+                <div class="bg-amber-100 border border-amber-200 p-6 rounded-xl shadow-lg fade-in flex flex-col" style="animation-delay: 0.1s;">
+                    <h3 class="text-xl font-bold text-amber-800 mb-4">🏆 Hall of Fame</h3>
+                    <div class="space-y-3 flex-grow">
+                        <!-- Winner 1 -->
+                        <div class="bg-white/60 p-3 rounded-lg flex items-center space-x-4">
+                            <img src="https://placehold.co/64x64/fde047/a16207?text=KF" alt="Dr Kalu Fernandes" class="w-16 h-16 rounded-full object-cover">
                             <div>
                                 <p class="font-semibold text-gray-800">Dr Kalu Fernandes</p>
                                 <p class="text-sm text-gray-600">District Physician</p>
                             </div>
                         </div>
-                        <!-- Finalist 3 -->
-                         <div class="finalist-card bg-gray-50 p-3 rounded-lg flex items-center space-x-4">
-                            <img src="https://placehold.co/64x64/E2E8F0/4A5568?text=DR" alt="Dr Rayyan" class="w-16 h-16 rounded-full object-cover border-2 border-gray-200">
+                         <!-- Winner 2 (Now with gold styling) -->
+                        <div class="bg-white/60 p-3 rounded-lg flex items-center space-x-4">
+                            <img src="https://placehold.co/64x64/fde047/a16207?text=RK" alt="Dr Raaju Kalal" class="w-16 h-16 rounded-full object-cover">
                             <div>
-                                <p class="font-semibold text-gray-800">Dr Rayyan</p>
-                                <p class="text-sm text-gray-600">Physician</p>
+                                <p class="font-semibold text-gray-800">Dr Raaju Kalal</p>
+                                <p class="text-sm text-gray-600">Deputy Chief Physician</p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Previous Winner Section -->
-                <div class="bg-amber-100 border border-amber-200 p-6 rounded-xl shadow-lg fade-in flex flex-col" style="animation-delay: 0.1s;">
-                    <h3 class="text-xl font-bold text-amber-800 mb-4">🏆 Last Week's Winner</h3>
-                    <div class="bg-white/60 p-3 rounded-lg flex items-center space-x-4 flex-grow">
-                        <img src="https://placehold.co/64x64/dbeafe/1e3a8a?text=RK" alt="Dr Raaju Kalal" class="w-16 h-16 rounded-full object-cover">
-                        <div>
-                            <p class="font-semibold text-gray-800">Dr Raaju Kalal</p>
-                            <p class="text-sm text-gray-600">Deputy Chief Physician</p>
                         </div>
                     </div>
                 </div>
@@ -146,9 +157,9 @@
                                     <label for="vote" class="block text-sm font-medium text-gray-700">Select Your Choice</label>
                                     <select id="vote" name="Voted For" required class="mt-1 form-input block w-full px-4 py-2 bg-gray-50 border-gray-300 rounded-md shadow-sm transition">
                                         <option value="" disabled selected>Select a finalist...</option>
-                                        <option value="Dr Ayaan Allu">Dr Ayaan Allu</option>
-                                        <option value="Dr Kalu Fernandes">Dr Kalu Fernandes</option>
                                         <option value="Dr Rayyan">Dr Rayyan</option>
+                                        <option value="Dr Haider Shah">Dr Haider Shah</option>
+                                        <option value="Dr Ayaan Allu">Dr Ayaan Allu</option>
                                     </select>
                                 </div>
 
@@ -185,23 +196,23 @@
             const formStatus = document.getElementById('formStatus');
 
             // --- Configuration ---
-            // Set a fixed end time for the voting period.
-            // This is Sunday, July 13, 2025, at 10:00 PM IST (22:00).
-            // This creates a 22-hour voting window starting from midnight.
-            const votingEndTime = new Date('2025-07-13T22:00:00.000+05:30');
+            // The end time is set for Sunday, July 20, 2025, at 10:00 PM IST (22:00).
+            const votingEndTime = new Date('2025-07-20T22:00:00.000+05:30');
 
-            const WINNER_NAME = "Dr Kalu Fernandes";
-            const WINNER_SPECIALTY = "District Physician";
-            const WINNER_IMAGE_TEXT = "KF";
+            // IMPORTANT: Update these constants with the winner of THIS round once voting is over.
+            // This is a placeholder for the future winner of the current round.
+            const WINNER_NAME = "Dr Rayyan";
+            const WINNER_SPECIALTY = "Ophthalmologist";
+            const WINNER_IMAGE_TEXT = "RY";
 
             // --- UI Functions ---
             function displayEndOfVoting() {
-                // This function is called after voting ends to show the winner.
+                // This function is called after the countdown finishes to show the winner.
                 statusWrapper.innerHTML = `
                     <div class="winner-card p-6 rounded-xl max-w-md mx-auto shadow-xl">
                         <div class="winner-trophy mb-2">🏆</div>
                         <h2 class="text-2xl font-bold text-yellow-900 mb-2">Voting has now closed!</h2>
-                        <p class="text-lg text-yellow-800 mb-4">Announcing the winner:</p>
+                        <p class="text-lg text-yellow-800 mb-4">Announcing this week's winner:</p>
                         <div class="flex items-center justify-center space-x-4">
                              <img src="https://placehold.co/80x80/fde047/a16207?text=${WINNER_IMAGE_TEXT}" alt="${WINNER_NAME}" class="w-20 h-20 rounded-full object-cover border-4 border-yellow-500">
                              <div>
@@ -212,7 +223,7 @@
                         <p class="mt-4 text-sm text-yellow-800">Thank you to everyone who voted!</p>
                     </div>
                 `;
-                // Disable the form completely
+                // Disable the form completely since voting is over.
                 votingFieldset.disabled = true;
                 submitButton.textContent = 'Voting Closed';
                 submitButton.classList.add('bg-gray-400', 'hover:bg-gray-400');
@@ -220,7 +231,7 @@
             }
 
             function setupCountdown() {
-                // Insert the countdown HTML structure into the page
+                // Insert the countdown HTML structure into the page.
                 statusWrapper.innerHTML = `
                     <h2 id="countdownTitle" class="text-2xl font-bold text-blue-900 mb-3">Voting Ends In</h2>
                     <div id="countdown" class="countdown-box text-white p-4 rounded-xl max-w-sm mx-auto flex justify-center space-x-4">
@@ -231,26 +242,25 @@
                     </div>
                 `;
                 
-                // Set up an interval to update the countdown every second
+                // Set up an interval to update the countdown every second.
                 const countdownInterval = setInterval(() => {
-                    // Get the current time. Using new Date() is fine because votingEndTime is an absolute time value.
                     const now = new Date();
                     const distance = votingEndTime.getTime() - now.getTime();
 
                     if (distance > 0) {
-                        // If there is still time left, calculate days, hours, minutes, seconds
+                        // If there is still time left, calculate days, hours, minutes, seconds.
                         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                        // Update the display with the new values
+                        // Update the display with the new values, padding with a '0' if needed.
                         document.getElementById("days").innerText = String(days).padStart(2, '0');
                         document.getElementById("hours").innerText = String(hours).padStart(2, '0');
                         document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
                         document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
                     } else {
-                        // If the countdown is finished, stop the timer and show the winner
+                        // If the countdown is finished, stop the timer and show the winner.
                         clearInterval(countdownInterval);
                         displayEndOfVoting();
                     }
@@ -260,12 +270,12 @@
             // --- Initial Page Load Logic ---
             function initializePage() {
                 const now = new Date();
-                // Check if the current time is already past the voting end time
+                // Check if the current time is already past the voting end time.
                 if (now.getTime() >= votingEndTime.getTime()) {
-                    // If voting is over, show the winner immediately
+                    // If voting is over, show the winner immediately.
                     displayEndOfVoting();
                 } else {
-                    // If voting is still active, start the countdown
+                    // If voting is still active, start the countdown.
                     setupCountdown();
                 }
             }
@@ -313,7 +323,7 @@
             
             form.addEventListener("submit", handleSubmit);
 
-            // Run the initial setup when the page loads
+            // Run the initial setup when the page loads.
             initializePage();
         });
     </script>
